@@ -1,0 +1,48 @@
+<html>
+<head>
+
+    <title>CG1 Exercise 04 - Texturing</title>
+
+    <!-- import main JavaScript module using RequireJS -->
+    <script src="js/libs/three.min.js"></script>
+    <script src="js/libs/stats.min.js"></script>
+    <script src="js/libs/dat.gui.min.js"></script>
+    <script src="js/controls/TrackballControls.js"></script>
+    <script src="js/controls/OrbitControls.js"></script>
+
+    <script src="js/scenecontroller.js"></script>
+    <script src="js/htmlcontroller.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- import style sheet -->
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css">
+
+</head>
+
+<script id="vertexShader" type="x-shader/x-vertex">
+    varying vec2 vUv;
+
+    void main() {
+        vUv = uv;
+
+        gl_Position =   projectionMatrix * modelViewMatrix * vec4(position,1.0);
+    }
+</script>
+
+<script id="fragmentShader" type="x-shader/x-fragment">
+    uniform sampler2D texture;
+
+    varying vec2 vUv;
+
+    void main() {
+        gl_FragColor = texture2D(texture, vUv);
+    }
+</script>
+
+
+<body onLoad="main()">
+    <!-- this element will be used to diplay errors -->
+    <pre id="error"></pre>
+
+</body>
+</html>
